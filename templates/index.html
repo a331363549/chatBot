@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理界面</title>
+</head>
+<body>
+    <h1 style="background-color: antiquewhite;color: black">添加信息</h1>
+    <form action="/index/" method="post">
+        {% csrf_token %}
+        <input type="text" name="name"  placeholder="菜名" />
+        <input type="text" name="type"  placeholder="类别" />
+        <input type="text" name="content"  placeholder="简介" />
+        <input type="number" name="price"  placeholder="金额" />
+        <input type="number" name="rating"  placeholder="评分" />
+        <input type="submit" value="添加"/>
+    </form>
+
+    <h1 style="background-color: antiquewhite;color: black">显示信息</h1>
+    <table border="1">
+        <thead>
+            <th>编号</th>
+            <th>菜名</th>
+            <th>类别</th>
+            <th>简介</th>
+            <th>价格</th>
+            <th>评分</th>
+        </thead>
+        <tbody>
+            {% for line in data %}
+                <tr>
+                    <td>{{ line.id }}</td>
+                    <td>{{ line.u_name }}</td>
+                    <td>{{ line.u_type }}</td>
+                    <td>{{ line.u_content }}</td>
+                    <td>{{ line.u_price }}</td>
+                    <td>{{ line.u_rating }}</td>
+                    <td><a href="/delete/{{ line.u_name }}"><button>删除</button></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/create_kg/"><button>生成</button></a>
+</body>
+</html>
